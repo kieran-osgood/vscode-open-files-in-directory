@@ -1,8 +1,11 @@
-# vscode-open-files-in-directory README
+# vscode-open-files-in-directory 
 
-This is the README for your extension "vscode-open-files-in-directory". After writing up a brief description, we recommend including the following sections.
+A vscode extension to open a directory-load of files. 
 
 ## Features
+
+This extension adds the option to the file explorer (and the command options, accessed with ctrl + shift + p, or cmd + shift + p on mac), to open all the files in the directory. If the selected item is a file it selects the parent directory, if its a directory it'll use that directory.
+
 
 Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
 
@@ -12,40 +15,23 @@ For example if there is an image subfolder under your extension project workspac
 
 > Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
 
-## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
+* `vscode-open-files-in-directory.maxRecursiveDepth` - Maximum depth to traverse through subfolders: ` default: 1`
+* `vscode-open-files-in-directory.maxFiles` - Maximum number of files to open in one action: `default: 10`
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+None currently 👀
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
-
 ### 1.0.0
 
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+Initial release of vscode-open-files-in-directory. 
+Adds ability to open all files within a directory, both recursively and non. 
 
 -----------------------------------------------------------------------------------------------------------
 
