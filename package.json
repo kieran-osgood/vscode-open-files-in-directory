@@ -10,7 +10,8 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:vscode-open-files-in-directory.currentDirFiles"
+        "onCommand:vscode-open-files-in-directory.currentDirFiles",
+        "onCommand:vscode-open-files-in-directory.currentDirFilesRecursively"
     ],
     "main": "./out/extension.js",
     "contributes": {
@@ -18,17 +19,27 @@
             {
                 "command": "vscode-open-files-in-directory.currentDirFiles",
                 "title": "Open all files in directory."
+            },
+            {
+                "command": "vscode-open-files-in-directory.currentDirFilesRecursively",
+                "title": "Recursively open all files in directory."
             }
         ],
         "menus": {
             "explorer/context": [
                 {
                     "command": "vscode-open-files-in-directory.currentDirFiles"
+                }, 
+                {
+                    "command": "vscode-open-files-in-directory.currentDirFilesRecursively"
                 }
             ],
             "editor/title/context": [
                 {
                     "command": "vscode-open-files-in-directory.currentDirFiles"
+                },
+                {
+                    "command": "vscode-open-files-in-directory.currentDirFilesRecursively"
                 }
             ]
         }

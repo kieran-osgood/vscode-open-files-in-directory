@@ -12,6 +12,12 @@ export function activate(context: vscode.ExtensionContext) {
             commands.openCurrentDirectoryFiles,
         ),
     );
+    subscriptions.push(
+        vscode.commands.registerCommand(
+            'vscode-open-files-in-directory.currentDirFilesRecursively',
+            commands.openCurrentDirectoryFilesRecursively,
+        ),
+    );
 
     context.subscriptions.push(...subscriptions);
 }
