@@ -3,7 +3,19 @@
     "displayName": "Open all files in directory",
     "description": "Opens all files in a directory",
     "publisher": "ko-dev",
-    "version": "0.0.1",
+    "version": "0.1.0",
+    "license": "MIT",
+    "homepage": "https://github.com/kieran-osgood/vscode-open-files-in-directory/blob/main/README.md",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/kieran-osgood/vscode-open-files-in-directory"
+    },
+    "keywords": [
+        "open",
+        "directory",
+        "file",
+        "recursive"
+    ],
     "engines": {
         "vscode": "^1.52.0"
     },
