@@ -1,6 +1,4 @@
 import * as vscode from 'vscode';
-import * as path from 'path';
-import * as fs from 'fs';
 import * as commands from './commands';
 
 export function activate(context: vscode.ExtensionContext) {
@@ -12,13 +10,17 @@ export function activate(context: vscode.ExtensionContext) {
             commands.openCurrentDirectoryFiles,
         ),
     );
+
     subscriptions.push(
         vscode.commands.registerCommand(
             'vscode-open-files-in-directory.currentDirFilesRecursively',
             commands.openCurrentDirectoryFilesRecursively,
         ),
     );
-
+    /**
+     * Add config options to enable/disable certain options?
+     *
+     */
     context.subscriptions.push(...subscriptions);
 }
 

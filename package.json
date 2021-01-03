@@ -1,7 +1,8 @@
 {
     "name": "vscode-open-files-in-directory",
-    "displayName": "vscode-open-files-in-directory",
+    "displayName": "Open all files in directory",
     "description": "Opens all files in a directory",
+    "publisher": "ko-dev",
     "version": "0.0.1",
     "engines": {
         "vscode": "^1.52.0"
@@ -29,7 +30,7 @@
             "explorer/context": [
                 {
                     "command": "vscode-open-files-in-directory.currentDirFiles"
-                }, 
+                },
                 {
                     "command": "vscode-open-files-in-directory.currentDirFilesRecursively"
                 }
@@ -42,6 +43,22 @@
                     "command": "vscode-open-files-in-directory.currentDirFilesRecursively"
                 }
             ]
+        },
+        "configuration": {
+            "type": "object",
+            "title": "Open Files In Directory Configuration",
+            "properties": {
+                "vscode-open-files-in-directory.maxRecursiveDepth": {
+                    "type": "number",
+                    "default": 1,
+                    "description": "Maximum depth to traverse through subfolders."
+                },
+                "vscode-open-files-in-directory.maxFiles": {
+                    "type": "number",
+                    "default": 3,
+                    "description": "Maximum number of files to open in one action."
+                }
+            }
         }
     },
     "scripts": {

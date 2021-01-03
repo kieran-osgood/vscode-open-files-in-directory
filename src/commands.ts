@@ -1,7 +1,8 @@
+import { Settings } from './types';
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
-import * as commands from './commands';
+import { extensionName } from './const';
 
 export const openCurrentDirectoryFiles = (uri: vscode.Uri) => {
     if (typeof uri === 'undefined') {
@@ -19,9 +20,22 @@ export const openCurrentDirectoryFilesRecursively = (uri: vscode.Uri) => {
     openAllFiles(uri, true);
 };
 
-function openAllFiles(uri: vscode.Uri, recursive: boolean = false) {
+function openAllFiles(
+    uri: vscode.Uri,
+    recursive: boolean = false,
+    depth = 0,
+    fileCount = 0,
+) {
     const isDirectory = fs.statSync(uri.path).isDirectory();
     let { dir: parentDir } = path.parse(uri.path);
+    const config = vscode.workspace
+        .getConfiguration()
+        .get(extensionName) as Settings;
+
+    if (depth > config.maxRecursiveDepth) return;
+    console.log('depth: ', depth);
+    if (fileCount > config.maxFiles) return;
+    console.log('fileCount: ', fileCount);
 
     if (isDirectory) {
         parentDir = uri.path;
@@ -39,13 +53,19 @@ function openAllFiles(uri: vscode.Uri, recursive: boolean = false) {
             const isDirectory = fs.statSync(filePath).isDirectory();
             if (isDirectory) {
                 if (recursive) {
-                    openAllFiles(vscode.Uri.file(filePath));
+                    openAllFiles(
+                        vscode.Uri.file(filePath),
+                        true,
+                        ++depth,
+                        ++fileCount,
+                    );
                 }
                 // early return avoids openTextDocument on directory
                 return;
             }
 
             vscode.workspace.openTextDocument(filePath).then((doc) => {
+                fileCount++;
                 vscode.window.showTextDocument(doc, { preview: false });
             });
         });
