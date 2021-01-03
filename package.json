@@ -19,11 +19,11 @@
         "commands": [
             {
                 "command": "vscode-open-files-in-directory.currentDirFiles",
-                "title": "Open all files in directory."
+                "title": "Open all files in directory"
             },
             {
                 "command": "vscode-open-files-in-directory.currentDirFilesRecursively",
-                "title": "Recursively open all files in directory."
+                "title": "Recursively open all files in director"
             }
         ],
         "menus": {
