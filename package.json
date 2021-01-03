@@ -1,59 +1,59 @@
 {
-  "name": "vscode-open-files-in-directory",
-  "displayName": "vscode-open-files-in-directory",
-  "description": "Opens all files in a directory",
-  "version": "0.0.1",
-  "engines": {
-    "vscode": "^1.52.0"
-  },
-  "categories": [
-    "Other"
-  ],
-  "activationEvents": [
-    "onCommand:vscode-open-files-in-directory.execute"
-  ],
-  "main": "./out/extension.js",
-  "contributes": {
-    "commands": [
-      {
-        "command": "vscode-open-files-in-directory.execute",
-        "title": "Open all files in directory."
-      }
+    "name": "vscode-open-files-in-directory",
+    "displayName": "vscode-open-files-in-directory",
+    "description": "Opens all files in a directory",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.52.0"
+    },
+    "categories": [
+        "Other"
     ],
-    "menus": {
-      "explorer/context": [
-        {
-          "command": "vscode-open-files-in-directory.execute"
+    "activationEvents": [
+        "onCommand:vscode-open-files-in-directory.execute"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "vscode-open-files-in-directory.currentDirFiles",
+                "title": "Open all files in directory."
+            }
+        ],
+        "menus": {
+            "explorer/context": [
+                {
+                    "command": "vscode-open-files-in-directory.currentDirFiles"
+                }
+            ],
+            "editor/title/context": [
+                {
+                    "command": "vscode-open-files-in-directory.currentDirFiles"
+                }
+            ]
         }
-      ],
-      "editor/title/context": [
-        {
-          "command": "vscode-open-files-in-directory.execute"
-        }
-      ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "pretest": "npm run compile && npm run lint",
+        "lint": "eslint src --ext ts",
+        "test": "node ./out/test/runTest.js"
+    },
+    "devDependencies": {
+        "@types/glob": "^7.1.3",
+        "@types/mocha": "^8.0.4",
+        "@types/node": "^12.11.7",
+        "@types/vscode": "^1.52.0",
+        "@typescript-eslint/eslint-plugin": "^4.9.0",
+        "@typescript-eslint/parser": "^4.9.0",
+        "eslint": "^7.15.0",
+        "glob": "^7.1.6",
+        "mocha": "^8.1.3",
+        "prettier": "2.2.1",
+        "tslint-config-prettier": "^1.18.0",
+        "typescript": "^4.1.2",
+        "vscode-test": "^1.4.1"
     }
-  },
-  "scripts": {
-    "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "pretest": "npm run compile && npm run lint",
-    "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js"
-  },
-  "devDependencies": {
-    "@types/glob": "^7.1.3",
-    "@types/mocha": "^8.0.4",
-    "@types/node": "^12.11.7",
-    "@types/vscode": "^1.52.0",
-    "@typescript-eslint/eslint-plugin": "^4.9.0",
-    "@typescript-eslint/parser": "^4.9.0",
-    "eslint": "^7.15.0",
-    "glob": "^7.1.6",
-    "mocha": "^8.1.3",
-    "prettier": "2.2.1",
-    "tslint-config-prettier": "^1.18.0",
-    "typescript": "^4.1.2",
-    "vscode-test": "^1.4.1"
-  }
 }
