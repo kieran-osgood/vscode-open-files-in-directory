@@ -10,7 +10,7 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:vscode-open-files-in-directory.execute"
+        "onCommand:vscode-open-files-in-directory.currentDirFiles"
     ],
     "main": "./out/extension.js",
     "contributes": {
