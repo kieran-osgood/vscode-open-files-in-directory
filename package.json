@@ -10,16 +10,28 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:vscode-open-files-in-directory.helloWorld"
+    "onCommand:vscode-open-files-in-directory.execute"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "vscode-open-files-in-directory.helloWorld",
-        "title": "Hello World"
+        "command": "vscode-open-files-in-directory.execute",
+        "title": "Open all files in directory."
       }
-    ]
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "vscode-open-files-in-directory.execute"
+        }
+      ],
+      "editor/title/context": [
+        {
+          "command": "vscode-open-files-in-directory.execute"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
