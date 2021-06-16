@@ -40,7 +40,7 @@
             },
             {
                 "command": "vscode-open-files-in-directory.currentDirFilesRecursively",
-                "title": "Recursively open all files in director"
+                "title": "Recursively open all files in directory"
             }
         ],
         "menus": {
