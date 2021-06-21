@@ -3,7 +3,7 @@
     "displayName": "Open all files in directory",
     "description": "Opens all files in a directory",
     "publisher": "ko-dev",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "license": "MIT",
     "icon": "icon.png",
     "homepage": "https://github.com/kieran-osgood/vscode-open-files-in-directory/blob/main/README.md",
