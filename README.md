@@ -10,7 +10,7 @@ This extension adds the option to the file explorer (and the command options, ac
 
 ## Installation
 Install within vscode by pressing `cmd + shift + p` and searching for extensions and searching for `vscode-open-files-in-directory`.
-Or, search the (releases in this repository)[https://github.com/kieran-osgood/vscode-open-files-in-directory/releases], download the vsix file, and install by running `ext install kieran-osgood.vscode-open-files-in-directory`
+Or, search the [releases in this repository](https://github.com/kieran-osgood/vscode-open-files-in-directory/releases), download the vsix file, and install by running `ext install kieran-osgood.vscode-open-files-in-directory`
 
 ## Extension Settings
 
