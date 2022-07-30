@@ -51,7 +51,7 @@ function openAllFiles(
 
         files.forEach((file) => {
             const filePath = vscode.Uri.joinPath(
-                vscode.Uri.parse(parentDir),
+                uri,
                 vscode.Uri.file(file).fsPath,
             );
             const isDirectory = checkPathIsDirectory(filePath.fsPath);
