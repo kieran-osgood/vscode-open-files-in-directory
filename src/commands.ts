@@ -39,7 +39,7 @@ function openAllFiles(
     if (fileCount > config.maxFiles) return;
 
     if (isDirectory) {
-        parentDir = uri.path;
+        parentDir = uri.fsPath;
     }
 
     fs.readdir(parentDir, (err, files: string[]) => {
