@@ -67,12 +67,12 @@
             "properties": {
                 "vscode-open-files-in-directory.maxRecursiveDepth": {
                     "type": "number",
-                    "default": 1,
+                    "default": 5,
                     "description": "Maximum depth to traverse through subfolders."
                 },
                 "vscode-open-files-in-directory.maxFiles": {
                     "type": "number",
-                    "default": 3,
+                    "default": 50,
                     "description": "Maximum number of files to open in one action."
                 }
             }
