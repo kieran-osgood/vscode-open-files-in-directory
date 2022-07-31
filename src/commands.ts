@@ -1,7 +1,6 @@
 import { Settings } from './types';
 import * as vscode from 'vscode';
 import * as path from 'path';
-import * as fs from 'fs';
 import { extensionName } from './const';
 
 const config = vscode.workspace
@@ -24,49 +23,31 @@ export const openCurrentDirectoryFilesRecursively = (uri: vscode.Uri) => {
     openAllFiles(uri, true);
 };
 
-const checkPathIsDirectory = (path: string) => fs.statSync(path).isDirectory();
+type ReadDirectory = Thenable<[string, vscode.FileType][]>;
+type ReadDirectorySuccess = Parameters<ReadDirectory['then']>[0];
+type ReadDirectoryFailure = Parameters<ReadDirectory['then']>[1];
 
-function openAllFiles(
+async function openAllFiles(
     uri: vscode.Uri,
     recursive: boolean = false,
     depth = 0,
     fileCount = 0,
 ) {
-    const isDirectory = checkPathIsDirectory(uri.fsPath);
-    let { dir: parentDir } = path.parse(uri.path);
-
-    if (depth > config.maxRecursiveDepth) return;
-    if (fileCount > config.maxFiles) return;
-
-    if (isDirectory) {
-        parentDir = uri.fsPath;
+    if (depth > config.maxRecursiveDepth) {
+        vscode.window.showErrorMessage(`config.maxRecursiveDepth`);
+    }
+    if (fileCount > config.maxFiles) {
+        vscode.window.showErrorMessage(`config.maxFiles`);
     }
 
-    fs.readdir(parentDir, (err, files: string[]) => {
-        if (err instanceof Error) {
-            return vscode.window.showErrorMessage(
-                `Can't read Directory. Error: ${err?.message}`,
-            );
-        }
+    const onSuccess: ReadDirectorySuccess = (files) => {
+        for (let [fileName, fileType] of files) {
+            const filePath = vscode.Uri.joinPath(uri, fileName);
 
-        files.forEach((file) => {
-            const filePath = vscode.Uri.joinPath(
-                uri,
-                vscode.Uri.file(file).fsPath,
-            );
-            const isDirectory = checkPathIsDirectory(filePath.fsPath);
-
-            if (isDirectory) {
-                if (recursive) {
-                    openAllFiles(
-                        vscode.Uri.file(filePath.fsPath),
-                        true,
-                        ++depth,
-                        ++fileCount,
-                    );
-                }
+            if (fileType === vscode.FileType.Directory && recursive) {
+                openAllFiles(filePath, true, ++depth, ++fileCount);
                 // early return avoids openTextDocument on directory
-                return;
+                continue;
             }
 
             type OnTextDocumentOpenedThenable = Parameters<
@@ -80,9 +61,6 @@ function openAllFiles(
 
             const onRejected: OnTextDocumentOpenedThenable[1] = (error) => {
                 if (error instanceof Error) {
-                    // vscode.window.showErrorMessage(
-                    //     `Can't open file. Error: ${error?.message}`,
-                    // );
                     console.log(`Can't open file. Error: ${error?.message}`);
                 }
             };
@@ -90,6 +68,18 @@ function openAllFiles(
             vscode.workspace
                 .openTextDocument(filePath)
                 .then(onFulfilled, onRejected);
-        });
-    });
+        }
+    };
+
+    const onFailure: ReadDirectoryFailure = (reason: any) => {
+        if (reason instanceof Error) {
+            vscode.window.showErrorMessage(
+                `Can't read Directory. Error: ${reason.message}`,
+            );
+        } else {
+            vscode.window.showErrorMessage(`Unknown Error with: ${reason}`);
+        }
+    };
+
+    vscode.workspace.fs.readDirectory(uri).then(onSuccess, onFailure);
 }
