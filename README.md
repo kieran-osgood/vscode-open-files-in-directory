@@ -16,8 +16,8 @@ Or, search the [releases in this repository](https://github.com/kieran-osgood/vs
 
 | Name                                               | Description                                    | Default Value           |
 | -------------------------------------------------- | ---------------------------------------------- | ----------------------- |
-| `vscode-open-files-in-directory.maxFiles`          | Maximum depth to traverse through subfolders:  |         `10`            |
-| `vscode-open-files-in-directory.maxRecursiveDepth` | Maximum number of files to open in one action: |          `1`            |
+| `vscode-open-files-in-directory.maxFiles`          | Maximum number of files to open in one action: |         `10`            |
+| `vscode-open-files-in-directory.maxRecursiveDepth` | Maximum depth to traverse through subfolders:  |          `1`            |
 ## Known Issues
 
 None currently 👀
