@@ -24,13 +24,8 @@ None currently 👀
 
 ## Release Notes
 
-### *1.0.0*
+See [Changelog.md](https://github.com/kieran-osgood/vscode-open-files-in-directory/blob/main/CHANGELOG.md)
 
-Initial release of vscode-open-files-in-directory. 
-Adds ability to open all files within a directory, both recursively and non.
-Allows specifying depth of recursion and maximum number of files to open. 
-
------------------------------------------------------------------------------------------------------------
 ## LICENSE
 
 MIT
