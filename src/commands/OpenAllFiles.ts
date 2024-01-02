@@ -22,12 +22,15 @@ export async function openAllFiles(
         // vscode.window.showErrorMessage(`config.maxRecursiveDepth`);
         console.log(
             `Reached recursion limit depth: ${depth} maxRecursiveDepth: ${config.maxRecursiveDepth}`,
+            // TODO: add hint to edit the setting to recurse deeper
         );
         return;
     }
+
     if (fileCount > config.maxFiles) {
         // vscode.window.showErrorMessage(`config.maxFiles`);
         console.log(`Reached maxFiles limit: ${depth}`);
+        // TODO: add hint to edit the setting to recurse deeper
         return;
     }
 
@@ -38,7 +41,7 @@ export async function openAllFiles(
         fileCount,
     );
 
-    vscode.workspace.fs
+    await vscode.workspace.fs
         .readDirectory(uri)
         .then(onReadDirectoryFulfilled, onReadDirectoryRejected);
 }

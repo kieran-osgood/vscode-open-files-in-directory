@@ -1,18 +1,37 @@
 import * as vscode from 'vscode';
 import { openAllFiles } from './commands/OpenAllFiles';
+const path = require('node:path');
 
-export const openCurrentDirectoryFiles = (uri: vscode.Uri) => {
-    if (typeof uri === 'undefined') {
-        vscode.window.showErrorMessage('Open a file to open its sibling files');
-        return;
+export const createCommandName = (s: string) =>
+    `vscode-open-files-in-directory.${s}`;
+
+const getActiveEditorParentDirectory = () => {
+    const uri = vscode.window.activeTextEditor?.document.uri;
+    if (!uri) {
+        return null;
     }
-    openAllFiles(uri);
+    const fsPath = path.dirname(uri.fsPath);
+    return vscode.Uri.parse(fsPath);
 };
 
-export const openCurrentDirectoryFilesRecursively = (uri: vscode.Uri) => {
+const handleOpenFiles = async (uri: vscode.Uri, recursive: boolean) => {
     if (typeof uri === 'undefined') {
-        vscode.window.showErrorMessage('Open a file to open its sibling files');
-        return;
+        const activeEditorDir = getActiveEditorParentDirectory();
+        if (!activeEditorDir) {
+            return vscode.window.showErrorMessage(
+                'Open a file to open its sibling files',
+            );
+        }
+        return openAllFiles(activeEditorDir, recursive);
     }
-    openAllFiles(uri, true);
+
+    return openAllFiles(uri, recursive);
+};
+
+export const openCurrentDirectoryFiles = async (uri: vscode.Uri) => {
+    return handleOpenFiles(uri, false);
+};
+
+export const openCurrentDirectoryFilesRecursively = async (uri: vscode.Uri) => {
+    return handleOpenFiles(uri, true);
 };
